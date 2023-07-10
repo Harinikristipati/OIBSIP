@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <img url="https://drive.google.com/file/d/1P1RiMkt4OetAg8GNGvhUj2gBUF_FZvIa/view?usp=sharing"/>
+    <style>
+        body {
+            
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: rgb(242, 202, 174);
+        }
+
+        .calculator {
+            width: 300px;
+            margin: 20px auto;
+            background-color: #f71ade;
+            padding: 20px;
+        }
+
+        .calculator input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-sizing:border-box;
+        }
+
+        .calculator .result {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .calculator .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 5px;
+        }
+
+        .calculator .buttons button {
+            padding: 10px;
+            font-size: 18px;
+            background-color: #09cef1;
+            color:black;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        
+        <input type="text" id="input" readonly>
+        <div class="result" id="result"></div>
+        <div class="buttons">
+            <button onclick="appendToInput('7')">7</button>
+            <button onclick="appendToInput('8')">8</button>
+            <button onclick="appendToInput('9')">9</button>
+            <button onclick="appendToInput('4')">4</button>
+            <button onclick="appendToInput('5')">5</button>
+            <button onclick="appendToInput('6')">6</button>
+            <button onclick="appendToInput('1')">1</button>
+            <button onclick="appendToInput('2')">2</button>
+            <button onclick="appendToInput('3')">3</button>
+            <button onclick="appendToInput('0')">0</button>
+            <button onclick="appendToInput('.')">.</button>
+            <button onclick="appendToInput('(')">(</button>
+            <button onclick="appendToInput(')')">)</button>
+            <button onclick="performOperation('+')">+</button>
+            <button onclick="performOperation('-')">-</button>
+            <button onclick="performOperation('*')">*</button>
+            <button onclick="performOperation('/')">/</button>
+            <button onclick="calculateResult()">=</button>
+            <button onclick="calculateSquareRoot()">√</button>
+            <button onclick="deleteCharacter()">Delete</button>
+            <button onclick="clearInput()">C</button>
+        </div>
+    </div>
+
+    <script>
+        const inputField = document.getElementById('input');
+        const resultField = document.getElementById('result');
+
+        function appendToInput(value) {
+            inputField.value += value;
+        }
+
+        function deleteCharacter() {
+            inputField.value = inputField.value.slice(0, -1);
+        }
+
+        function clearInput() {
+            inputField.value = '';
+            resultField.textContent = '';
+        }
+
+        function performOperation(operator) {
+            inputField.value += operator;
+        }
+
+        function calculateResult() {
+            try {
+                const result = eval(inputField.value);
+                resultField.textContent = result;
+            } catch (error) {
+                resultField.textContent = 'Error';
+            }
+        }
+
+        function calculateSquareRoot() {
+            const number = parseFloat(inputField.value);
+            if (!isNaN(number)) {
+                const result = Math.sqrt(number);
+                resultField.textContent = result;
+            } else {
+                resultField.textContent = 'Invalid input';
+            }
+        }
+    </script>
+</body>
+</html>
